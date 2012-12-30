@@ -323,7 +323,7 @@ function displayId($id)
 			echo TAB . '<span class="name">' . $package['name'] . '</span>' . EOL;
 			echo TAB . '<span class="date">' . date('Y/m/d H:i', $package['desc']['BUILDDATE']) . '</span>' . EOL;
 			echo TAB . '<span class="version">' . $package['version'] . '</span>' .EOL;
-			echo TAB . '<span class="link"><a href="' . $package['page'] . '">(…)</a></span>' . EOL;
+			echo TAB . '<span class="link"><a href="' . $package['page'] . '" target="_blank">(…)</a></span>' . EOL;
 		echo '</div>' . EOL;
 	}
 	
