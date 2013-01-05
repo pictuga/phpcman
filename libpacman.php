@@ -128,12 +128,15 @@ function listRepoPackage($name)
 	{
 		preg_match_all('#^(.+)-([0-9a-zA-Z_.:~]+-[0-9.]+)$#' , $file, $match);
 		$page = 'https://www.archlinux.org/packages/' . $name . '/' . $GLOBALS['CONF']['server']['arch'] . '/' . $match[1][0] . '/';
+		$pkgbuild = 'https://projects.archlinux.org/svntogit/packages.git/plain/trunk/PKGBUILD?h=packages/' . $match[1][0];
+
 		$out[$match[1][0]] = array(
 			'name'	=> $match[1][0],
 			'repo'	=> $name,
 			'version' => $match[2][0],
 			'file'	=> $match[0][0],
-			'page'	=> $page);
+			'page'	=> $page,
+			'pkgbuild' => $pkgbuild);
 	}
 	
 	//print_r($out);
@@ -168,7 +171,7 @@ function getExtraInfo($list, $batch=true)
 	
 	foreach($list as &$package)
 	{
-		if(count($package) == 5)
+		if(count($package) == 6)
 		{
 			$package['depends'] = parsePackageInfo($package['file'], $package['repo'], 'depends');
 			$package['desc'] = makeSimpleAssoc(parsePackageInfo($package['file'], $package['repo'], 'desc'));
@@ -200,7 +203,8 @@ function checkAUR($list)
 			'version' => $package['Version'],
 			'repo'	=> 'aur',
 			'desc'	=> array('BUILDDATE' => $package['LastModified']),
-			'page'	=> 'https://aur.archlinux.org/packages/' . $package['Name'] . '/'
+			'page'	=> 'https://aur.archlinux.org/packages/' . $package['Name'] . '/',
+			'pkgbuild' => 'https://aur.archlinux.org/packages/' . substr($package['Name'], 0, 2) . '/' . $package['Name'] . '/PKGBUILD'
 			);
 	}
 	
