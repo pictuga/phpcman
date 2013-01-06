@@ -128,7 +128,9 @@ function listRepoPackage($name)
 	{
 		preg_match_all('#^(.+)-([0-9a-zA-Z_.:~]+-[0-9.]+)$#' , $file, $match);
 		$page = 'https://www.archlinux.org/packages/' . $name . '/' . $GLOBALS['CONF']['server']['arch'] . '/' . $match[1][0] . '/';
-		$pkgbuild = 'https://projects.archlinux.org/svntogit/packages.git/plain/trunk/PKGBUILD?h=packages/' . $match[1][0];
+		$pkgbuild = 'https://projects.archlinux.org/svntogit/'
+			. ($name == 'community' ? 'community' : 'packages')
+			. '.git/plain/trunk/PKGBUILD?h=packages/' . $match[1][0];
 
 		$out[$match[1][0]] = array(
 			'name'	=> $match[1][0],
