@@ -19,7 +19,7 @@ function safetyCheck()
 {
 	if(is_file('cache_lock'))
 	{
-		if(file_get_contents('cache_lock') > time()+60*10)
+		if(file_get_contents('cache_lock')+60*10 < time())
 		{
 			echo "update failed...";
 			unlink('cache_lock');
