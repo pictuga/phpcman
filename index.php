@@ -72,6 +72,12 @@ define("TAB", "\t");
 			padding: 10px;
 			margin-bottom: .5em;
 			font-family: sans-serif;
+			transition: background-color 0.5s;
+		}
+
+		#list > div:hover
+		{
+			background-color: #eeeeee;
 		}
 		
 		#list span.name
